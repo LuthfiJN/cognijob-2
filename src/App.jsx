@@ -1,27 +1,28 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-// Import Halaman Publik
+// Import page Publik
 import LandingPage from './pages/LandingPage'
 import RegisterSelection from './pages/RegisterSelection'
 import Register from './pages/Register'
 import Login from './pages/Login' 
 
-// Import Layout dan Halaman Recruiter
+// Import layout & page recruiter
 import RecruiterLayout from './components/layout/RecruiterLayout'
 import DashboardOverview from './pages/recruiter/DashboardOverview'
 import JobDetail from './pages/recruiter/JobDetail'
 import Settings from './pages/recruiter/Settings'
 import CreateJob from './pages/recruiter/CreateJob'
+import Jobs from './pages/recruiter/Jobs'
+import EditJob from './pages/recruiter/EditJob'
+import Messages from './pages/recruiter/Messages'
+import ApplicantManagement from "./pages/recruiter/ApplicantManagement"
+import CompanyProfile from "./pages/recruiter/CompanyProfile";
 
 
-/**
- * PlaceholderPage digunakan sementara untuk menu yang belum memiliki file halaman sendiri.
- * Ini mencegah aplikasi error saat kamu menekan menu di Sidebar.
- */
 const PlaceholderPage = ({ title }) => (
   <div className="p-6 bg-white rounded-2xl shadow-sm border border-black/5 animate-fade-in">
     <h1 className="text-2xl font-bold text-[#0B173D]">{title}</h1>
-    <p className="text-gray-500 mt-2">Halaman ini sedang dalam tahap pengembangan.</p>
+    <p className="text-gray-500 mt-2">Halaman ini sedang dalam tahap dev.</p>
   </div>
 )
 
@@ -49,23 +50,26 @@ function App() {
           
           {/* Default landing page untuk recruiter: /recruiter/dashboard */}
           <Route path="dashboard" element={<DashboardOverview />} />
+        
+
+   
           
-          {/* Detail spesifik lowongan berdasarkan ID: /recruiter/dashboard/job/:id */}
-          <Route path="dashboard/job/:id" element={<JobDetail />} />
-          
-          {/* Menu manajemen lainnya sesuai PRD */}
-          <Route path="jobs" element={<PlaceholderPage title="Job Management" />} />
+          {/* Menu manajemen lainnya*/}
+          <Route path="jobs" element={<Jobs />} />
+          <Route path="jobs/job/:id" element={<JobDetail />} />
+
           <Route path="create-job" element={<CreateJob />} />
-          <Route path="applicants" element={<PlaceholderPage title="Applicant Management" />} />
-          <Route path="messages" element={<PlaceholderPage title="Messages" />} />
-          <Route path="company-profile" element={<PlaceholderPage title="Company Profile" />} />
+          <Route path="edit-job/:id" element={<EditJob />} />
+
+          <Route path="applicants" element={<ApplicantManagement />} />
+          <Route path="messages" element={<Messages />} />
+          <Route path="company-profile" element={<CompanyProfile />} />
           <Route path="settings" element={<Settings />} />
-          
           
         </Route>
 
-        {/* Catatan: Jika user mengetik URL yang salah, 
-            kamu bisa menambahkan rute 404 di sini nantinya. 
+        {/* jika user mengetik URL yang salah, 
+             bisa tambahkan rute 404 di sini. 
         */}
       </Routes>
     </BrowserRouter>
